@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct PokedexApp: App {
+    let networkService = NetworkServiceImpl()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PokedexGrid(viewModel: PokedexGridViewModel(networkService: networkService))
         }
     }
 }
