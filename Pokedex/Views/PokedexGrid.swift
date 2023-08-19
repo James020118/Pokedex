@@ -23,18 +23,56 @@ struct PokedexGrid: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: .medium) {
-                    ForEach(viewModel.pokemons) { pokemon in
-                        PokedexGridCell(pokemon: pokemon)
+            GeometryReader { geometry in
+                VStack {
+                    displayCard(screenWidth: geometry.size.width)
+
+                    ScrollView {
+                        mainGrid
                     }
+                    .navigationTitle("Pokédex")
+                    .padding(.horizontal, .screenEdge)
                 }
             }
-            .navigationTitle("Pokédex")
-            .padding(.horizontal, .screenEdge)
         }
         .onAppear {
             viewModel.getPokemonList()
+        }
+    }
+}
+
+private extension PokedexGrid {
+    var mainGrid: some View {
+        LazyVGrid(columns: columns, spacing: .medium) {
+            ForEach(viewModel.pokemonDetails) { detail in
+                PokedexGridCell(detail: detail)
+                    .onTapGesture {
+                        viewModel.didTapCell(url: detail.images.front_image)
+                    }
+            }
+        }
+    }
+    
+    func displayCard(screenWidth: CGFloat) -> some View {
+        ZStack {
+            Image("whos_that_pokemon")
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(10)
+                .frame(height: 200)
+                .padding(.bottom, .small)
+            
+            if let url = URL(string: viewModel.displayedPokemonImageUrl ?? "") {
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(height: 170)
+                .offset(x: -screenWidth * 0.2)
+            }
         }
     }
 }

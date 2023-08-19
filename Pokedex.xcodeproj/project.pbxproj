@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		401255EC2A91397800824CE6 /* PokemonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401255EB2A91397800824CE6 /* PokemonDetail.swift */; };
+		401255F02A913B2400824CE6 /* PokemonImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401255EF2A913B2400824CE6 /* PokemonImages.swift */; };
 		408D49792A9004C200F75720 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408D49782A9004C200F75720 /* Spacing.swift */; };
 		408D497C2A90070F00F75720 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408D497B2A90070F00F75720 /* Pokemon.swift */; };
 		408D497E2A9007EB00F75720 /* PokedexGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408D497D2A9007EB00F75720 /* PokedexGridCell.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		401255EB2A91397800824CE6 /* PokemonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetail.swift; sourceTree = "<group>"; };
+		401255EF2A913B2400824CE6 /* PokemonImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonImages.swift; sourceTree = "<group>"; };
 		408D49782A9004C200F75720 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		408D497B2A90070F00F75720 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		408D497D2A9007EB00F75720 /* PokedexGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexGridCell.swift; sourceTree = "<group>"; };
@@ -81,7 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				408D497B2A90070F00F75720 /* Pokemon.swift */,
+				401255EB2A91397800824CE6 /* PokemonDetail.swift */,
 				408D49852A90231C00F75720 /* FetchListResponse.swift */,
+				401255EF2A913B2400824CE6 /* PokemonImages.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,7 +203,9 @@
 			files = (
 				408D497E2A9007EB00F75720 /* PokedexGridCell.swift in Sources */,
 				40B21C642A8EC1900074F79C /* PokedexGrid.swift in Sources */,
+				401255EC2A91397800824CE6 /* PokemonDetail.swift in Sources */,
 				408D497C2A90070F00F75720 /* Pokemon.swift in Sources */,
+				401255F02A913B2400824CE6 /* PokemonImages.swift in Sources */,
 				40B21C622A8EC1900074F79C /* PokedexApp.swift in Sources */,
 				408D49792A9004C200F75720 /* Spacing.swift in Sources */,
 				408D49822A900CB000F75720 /* PokedexGridViewModel.swift in Sources */,

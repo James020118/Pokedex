@@ -14,26 +14,58 @@ final class PokedexGridViewModel: ObservableObject {
         self.networkService = networkService
     }
 
-    @Published var pokemons: [Pokemon] = []
-    
+    @Published var pokemonDetails: [PokemonDetail] = []
+    @Published var displayedPokemonImageUrl: String? = nil
+
     private var cancellables = Set<AnyCancellable>()
     private let networkService: NetworkService
+    private var pokemons: [Pokemon] = []
 }
+
+// MARK: - Actions
+
+extension PokedexGridViewModel {
+    func didTapCell(url: String) {
+        displayedPokemonImageUrl = url
+    }
+}
+
+// MARK: - Network calls
 
 extension PokedexGridViewModel {
     func getPokemonList() {
         networkService.fetchList()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                    print(".sink() received the completion", String(describing: completion))
+            .sink(receiveCompletion: { [weak self] completion in
                     switch completion {
-                        case .finished:
-                            break
-                        case .failure(let error):
-                            print("received error: ", error)
+                    case .finished:
+                        self?.pokemons.forEach {
+                            self?.getPokemonDetail(url: $0.url)
+                        }
+                        break
+                    case .failure(let error):
+                        // Some error handling here
+                        print("received error: ", error)
                     }
             }, receiveValue: { [weak self] response in
-                self?.pokemons = response.results
+                self?.pokemons.append(contentsOf: response.results)
+            })
+            .store(in: &cancellables)
+    }
+    
+    func getPokemonDetail(url: String) {
+        networkService.fetchDetail(urlString: url)
+            // Need to receive on main thread since this causes UI changes
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        // Some error handling here
+                        print("received error: ", error)
+                    }
+            }, receiveValue: { [weak self] response in
+                self?.pokemonDetails.append(response)
             })
             .store(in: &cancellables)
     }

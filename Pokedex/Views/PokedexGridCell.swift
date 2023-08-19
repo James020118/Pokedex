@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PokedexGridCell: View {
-    let pokemon: Pokemon
+
+    let detail: PokemonDetail
     
     var body: some View {
         ZStack {
@@ -24,14 +25,21 @@ struct PokedexGridCell: View {
 private extension PokedexGridCell {
     var content: some View {
         VStack(spacing: .small) {
-            Text(pokemon.name.capitalized)
-            Image(systemName: "atom")
+            Text(detail.name.capitalized)
+                .bold()
+            AsyncImage(
+                url: URL(string: detail.images.front_image)
+            ) { image in
+                image
+            } placeholder: {
+                ProgressView()
+            }
         }
     }
 }
 
 struct PokedexGridCell_Previews: PreviewProvider {
     static var previews: some View {
-        PokedexGridCell(pokemon: Pokemon(name: "Pikachu", url: ""))
+        PokedexGridCell(detail: PokemonDetail(name: "Pikachu"))
     }
 }
