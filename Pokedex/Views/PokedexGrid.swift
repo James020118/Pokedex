@@ -49,6 +49,12 @@ private extension PokedexGrid {
                     .onTapGesture {
                         viewModel.didTapCell(url: detail.images.front_image)
                     }
+                    .onAppear {
+                        guard !viewModel.isLoading else { return }
+                        if viewModel.isLastPokemon(detail: detail) {
+                            viewModel.getPokemonList()
+                        }
+                    }
             }
         }
     }

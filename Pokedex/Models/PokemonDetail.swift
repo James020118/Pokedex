@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct PokemonDetail: Codable, Identifiable {
+struct PokemonDetail: Codable, Identifiable, Equatable {
+    static func == (lhs: PokemonDetail, rhs: PokemonDetail) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name
+    }
+    
     let id = UUID().uuidString
     let name: String
     let images: PokemonImages

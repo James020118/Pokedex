@@ -11,8 +11,9 @@ import Foundation
 /// Network service of the app responsible for retrieving data from external API
 protocol NetworkService: AnyObject {
     /// Fetches the list of pokemons
+    /// - Parameter urlString: the URL endpoint that delivers the paginated pokemon list
     /// - Returns: A publisher that publishes the API response
-    func fetchList() -> AnyPublisher<FetchListResponse, Error>
+    func fetchList(urlString: String) -> AnyPublisher<FetchListResponse, Error>
     
     /// Fetches the detail of a specific pokemon given the url
     /// - Parameter urlString: the URL endpoint that delivers the pokemon details
@@ -21,14 +22,13 @@ protocol NetworkService: AnyObject {
 }
 
 final class NetworkServiceImpl: NetworkService {
-    private let baseURL = "https://pokeapi.co/api/v2/pokemon"
     private let session = URLSession.shared
     private let jsonDecoder = JSONDecoder()
 }
 
 extension NetworkServiceImpl {
-    func fetchList() -> AnyPublisher<FetchListResponse, Error> {
-        guard let url = URL(string: baseURL.appending("?limit=20&offset=0")) else {
+    func fetchList(urlString: String) -> AnyPublisher<FetchListResponse, Error> {
+        guard let url = URL(string: urlString) else {
             return Fail<FetchListResponse, Error>(error: NSError()).eraseToAnyPublisher()
         }
         return session.dataTaskPublisher(for: url)
