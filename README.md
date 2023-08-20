@@ -4,7 +4,9 @@ Pokédex is a SwiftUI application that utilizes Combine framework to retrieves d
 
 ## Screenshots
 
-
+| Image1 | Image2 |
+| ------ | ------ |
+| <img width="400" src="https://github.com/James020118/Pokedex/assets/45859048/1c4f8a7f-d7f1-4053-b320-34ea998162f6"> | <img width="400" src="https://github.com/James020118/Pokedex/assets/45859048/626a12b0-7ccd-42c1-94f0-a232e6f30c96"> |
 
 ## Code Design
 
