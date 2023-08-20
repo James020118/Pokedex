@@ -14,6 +14,7 @@ Pokédex is a SwiftUI application that utilizes Combine framework to retrieves d
 
 SwiftUI is used to make the UI portion of the app. I chose it because its easy of use. SwiftUI eliminates the use of storyboards and constraints, which makes sizing and adapting to screen sizes very easy.
 
+Results are paginated so we only fetch and load more cells when we scroll to the bottom of grid.
 
 Main Grid:
 ```swift
